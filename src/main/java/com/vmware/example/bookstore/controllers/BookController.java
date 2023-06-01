@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -31,9 +32,19 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Book not found",
                     content = @Content) })
     @GetMapping("/{id}")
-    public Book findById(@PathVariable long id) throws Throwable {
-        return repository.findById(id)
-                .orElseThrow(() -> new BookNotFoundException());
+    public ResponseEntity<Book> findById(@PathVariable long id) throws BookNotFoundException {
+      Optional<Book> b = repository.findById(id);
+
+    ;
+           if(b.isEmpty()){
+               return new ResponseEntity<Book>(HttpStatus.NOT_FOUND);
+           }else {
+               return new ResponseEntity<Book>(b.get(), HttpStatus.OK);
+
+           }
+
+
+
     }
 
     @GetMapping("/")
@@ -52,6 +63,7 @@ public class BookController {
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin(origins = "https://tap-gui.view.amer.end2end.link")
+
     public Book createBook(
              @RequestBody final Book book) {
         return repository.save(book);
