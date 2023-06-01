@@ -23,6 +23,7 @@ public class BookController {
     private BookRepository repository;
 
     @Operation(summary = "Get a book by its id")
+    @CrossOrigin(origins = "https://tap-gui.view.amer.end2end.link")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found the book",
                     content = { @Content(mediaType = "application/json",
@@ -36,15 +37,24 @@ public class BookController {
     }
 
     @GetMapping("/")
+    @CrossOrigin(origins = "https://tap-gui.view.amer.end2end.link")
     public Collection<Book> findBooks() {
         return repository.findAll();
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Book> updateBook(
+    @CrossOrigin(origins = "https://tap-gui.view.amer.end2end.link")
+    public Book updateBook(
             @PathVariable("id") final Long id, @RequestBody final Book book) {
-        return repository.findById(id);
+        return repository.save(book);
+    }
+    @PostMapping()
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(origins = "https://tap-gui.view.amer.end2end.link")
+    public Book createBook(
+             @RequestBody final Book book) {
+        return repository.save(book);
     }
 
 
