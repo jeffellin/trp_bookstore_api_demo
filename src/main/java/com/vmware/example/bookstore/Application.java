@@ -2,6 +2,8 @@ package com.vmware.example.bookstore;
 
 import java.util.Arrays;
 
+import com.vmware.example.bookstore.model.Book;
+import com.vmware.example.bookstore.repositories.BookRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,10 +26,18 @@ public class Application {
 			System.out.println("Let's inspect the beans provided by Spring Boot:");
 
 			String[] beanNames = ctx.getBeanDefinitionNames();
-			Arrays.sort(beanNames);
-			for (String beanName : beanNames) {
-				System.out.println(beanName);
-			}
+
+			BookRepository br = ctx.getBean(BookRepository.class);
+
+			Book b = new Book("Clean and Present Danger");
+			br.save(b);
+
+			b = new Book("Red Storm Rising");
+			br.save(b);
+
+			b = new Book("Hunt for Red October");
+			br.save(b);
+
 
 		};
 	}
