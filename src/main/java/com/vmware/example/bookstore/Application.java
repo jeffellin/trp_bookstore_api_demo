@@ -29,13 +29,13 @@ public class Application {
 
 			BookRepository br = ctx.getBean(BookRepository.class);
 
-			Book b = new Book("Clean and Present Danger");
+Book b = new Book("Don Quixote");
 			br.save(b);
-
-			b = new Book("Red Storm Rising");
+			b = new Book("When A Crocodile Eats the Sun");
 			br.save(b);
-
-			b = new Book("Hunt for Red October");
+			b = new Book("Wild Swans");
+			br.save(b);
+			b = new Book("The Catcher in the Rye");
 			br.save(b);
 
 
