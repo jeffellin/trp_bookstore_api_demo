@@ -12,7 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
     @Bean
      protected void configure(HttpSecurity http) throws Exception {
-         http
-             .cors(cors -> cors.disable());
+        http.authorizeHttpRequests((authorizeRequests)->authorizeRequests.anyRequest().permitAll())
+            .cors(cors->cors.disable());
+         
      }
  }
