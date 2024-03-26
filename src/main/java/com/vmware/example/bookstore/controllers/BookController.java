@@ -55,7 +55,7 @@ public class BookController {
 
     @GetMapping("/test")
     @CrossOrigin(origins = "https://tap-gui.view.lab.ellin.net")
-    public String findBooks() {
+    public String showTest() {
         return "Test Result";
     }
 
