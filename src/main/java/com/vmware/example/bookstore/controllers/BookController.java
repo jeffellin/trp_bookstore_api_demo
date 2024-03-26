@@ -53,6 +53,12 @@ public class BookController {
         return repository.findAll();
     }
 
+    @GetMapping("/test")
+    @CrossOrigin(origins = "https://tap-gui.view.lab.ellin.net")
+    public String findBooks() {
+        return "Test Result";
+    }
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin(origins = "https://tap-gui.view.lab.ellin.net")
